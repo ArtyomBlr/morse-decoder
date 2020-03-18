@@ -37,7 +37,7 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
-const MORSE_TABLE_NUMBER = {
+/*const MORSE_TABLE_NUMBER = {
     '0000001011': 'a',
     '0011101010': 'b',
     '0011101110': 'c',
@@ -74,23 +74,37 @@ const MORSE_TABLE_NUMBER = {
     '1111111010': '8',
     '1111111110': '9',
     '1111111111': '0',
-};
+};*/
 
 function decode(expr) {
-    Object.keys(MORSE_TABLE);
-   for(key in MORSE_TABLE){
-       var morse = key.split("");
-       for(var i = 0; i <= 5; i++){
-           if(morse[i] == '.'){
-               morse[i] = 10;
-           }/* else if(morse[i] === '-'){
-               morse[i] = 11;
-           }*/
-       }
+    let decodedMorse = '',
+    decodedMorseWords = '',
+    letters,
+    firstEl = 0;
+
+   for(let i = 0; i < expr.length/10; i++) {
        
-   }
-   return morse.join('');
+       letters = expr.slice(firstEl, firstEl + 10);
+       firstEl += 10;
+
+       if(letters == '**********'){
+           decodedMorse += " ";
+       }
+
+        for(let j = 0; j <= 10; j += 2){
+            switch(letters.slice(j, j + 2)) {
+                case '10': decodedMorseWords += '.'; 
+                break;
+                case '11': decodedMorseWords += '-'; 
+                break;
+                default: break;
+            }
+        }
+        decodedMorse += MORSE_TABLE[decodedMorseWords];
+    }
+   return decodedMorse;
 }
+
 module.exports = {
     decode
 }
