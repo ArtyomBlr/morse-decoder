@@ -47,16 +47,28 @@ function decode(expr) {
     let arr = expr.match(PATTERN);
     
     for(let i = 0; i < arr.length; i++) {
-        arr[i] = arr[i].replace(numberZero, "");
-        arr[i] = arr[i].replace(numberEleven, ".");
-        arr[i] = arr[i].replace(numberTen, "-");
-        arr[i] = arr[i].replace(space, " ");
 
+       /* if(arr[i] == space) {
+            arr[i] = arr[i].replace(space, " ");
+        }*/
+
+        while(arr[i].includes('00')){
+            arr[i] = arr[i].replace(numberZero, "");
+        }
+        while(arr[i].includes('10')){
+            arr[i] = arr[i].replace(numberTen, ".");
+        }
+        while(arr[i].includes('11')){
+            arr[i] = arr[i].replace(numberEleven, "-");
+        }
+        while(arr[i].includes('**********')){
+            arr[i] = arr[i].replace(numberEleven, " ");
+        }
+        
         arr[i] = MORSE_TABLE[arr[i]];
     }
 
     return arr.join("");
-
 
 }
 module.exports = {
