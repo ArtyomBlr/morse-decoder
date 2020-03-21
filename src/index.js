@@ -52,9 +52,6 @@ function decode(expr) {
             arr[i] = arr[i].replace(space, " ");
         }*/
 
-        while(arr[i].includes('00')){
-            arr[i] = arr[i].replace(numberZero, "");
-        }
         while(arr[i].includes('10')){
             arr[i] = arr[i].replace(numberTen, ".");
         }
