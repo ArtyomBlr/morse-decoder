@@ -48,7 +48,7 @@ function decode(expr) {
     
     for(let i = 0; i < arr.length; i++) {
 
-       /* if(arr[i] == space) {
+       /*if(arr[i].includes('**********')) {
             arr[i] = arr[i].replace(space, " ");
         }*/
 
@@ -58,11 +58,12 @@ function decode(expr) {
         while(arr[i].includes('11')){
             arr[i] = arr[i].replace(numberEleven, "-");
         }
-        while(arr[i].includes('**********')){
-            arr[i] = arr[i].replace(numberEleven, " ");
+        while(arr[i].includes('00')){
+            arr[i] = arr[i].replace(numberZero, "");
         }
+
         
-        arr[i] = MORSE_TABLE[arr[i]];
+        arr[i] = (MORSE_TABLE.hasOwnProperty(arr[i])) ? MORSE_TABLE[arr[i]] : " ";
     }
 
     return arr.join("");
